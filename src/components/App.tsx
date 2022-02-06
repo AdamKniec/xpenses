@@ -4,6 +4,7 @@ import ExpensesForm from "./Form";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import List from "./List";
+import { useState } from "react";
 
 const DUMMY_DATA =
   [
@@ -14,6 +15,8 @@ const DUMMY_DATA =
   ] || [];
 
 function App() {
+  const [formValues, setFormValues] = useState();
+
   return (
     <>
       <Container>
@@ -21,7 +24,7 @@ function App() {
           <header className="App-header">
             <h1>Xpenses</h1>
           </header>
-          <ExpensesForm />
+          <ExpensesForm setFormValues={setFormValues} />
         </div>
       </Container>
       <Container className="mt-5">
