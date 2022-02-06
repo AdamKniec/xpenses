@@ -1,8 +1,17 @@
-import { Container, ListGroup } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 import ExpensesForm from "./Form";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import List from "./List";
+
+const DUMMY_DATA =
+  [
+    { productOrService: "Czynsz", price: 1000, id: 1 },
+    { productOrService: "Zakupy", price: 23, id: 2 },
+    { productOrService: "Prezent", price: 44, id: 3 },
+    { productOrService: "Restauracja", price: 53, id: 4 },
+  ] || [];
 
 function App() {
   return (
@@ -16,15 +25,7 @@ function App() {
         </div>
       </Container>
       <Container className="mt-5">
-        <ListGroup defaultActiveKey="#link1">
-          <ListGroup.Item action href="#link1">
-            Link 1
-          </ListGroup.Item>
-          <ListGroup.Item action href="#link2" disabled>
-            Link 2
-          </ListGroup.Item>
-          <ListGroup.Item>This one is a button</ListGroup.Item>
-        </ListGroup>
+        <List data={DUMMY_DATA} />
       </Container>
     </>
   );
