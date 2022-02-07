@@ -26,25 +26,33 @@ const ExpensesForm = (props: any) => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="50/50" onChange={handleChange} />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="herShare">
-          <Form.Label>K</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Wpisz kwotę"
+          <Form.Check
+            type="checkbox"
+            label="50/50"
             onChange={handleChange}
+            checked={props.allowSplit}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="hisShare">
-          <Form.Label>A</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Wpisz kwotę"
-            onChange={handleChange}
-          />
-        </Form.Group>
+        {!props.allowSplit && (
+          <>
+            <Form.Group className="mb-3" controlId="herShare">
+              <Form.Label>K</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Wpisz kwotę"
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="hisShare">
+              <Form.Label>A</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Wpisz kwotę"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </>
+        )}
 
         <Form.Group className="mb-3" controlId="product">
           <Form.Label>Za co</Form.Label>

@@ -15,8 +15,11 @@ const DUMMY_DATA =
   ] || [];
 
 function App() {
-  const [formValues, setFormValues] = useState();
-
+  const [formValues, setFormValues] = useState({
+    price: 0,
+    formBasicCheckbox: true,
+  });
+  console.log(formValues);
   return (
     <>
       <Container>
@@ -24,7 +27,10 @@ function App() {
           <header className="App-header">
             <h1>Xpenses</h1>
           </header>
-          <ExpensesForm setFormValues={setFormValues} />
+          <ExpensesForm
+            setFormValues={setFormValues}
+            allowSplit={formValues.formBasicCheckbox}
+          />
         </div>
       </Container>
       <Container className="mt-5">
