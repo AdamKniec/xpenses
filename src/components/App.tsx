@@ -4,7 +4,7 @@ import ExpensesForm from "./Form";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import List from "./List";
-import { useReducer, useState } from "react";
+import React, { useReducer, useState } from "react";
 
 const initialState = {
   listData:
@@ -34,6 +34,14 @@ const reducer = (
           },
         ],
       };
+
+    case "removeListItem":
+      return {
+        ...state,
+        listData: state.listData.filter((listItem) => {
+          return listItem.id !== action.payload;
+        }),
+      };
     default:
       return state;
   }
@@ -49,7 +57,14 @@ function App() {
 
   const addNewListItem = (e: any) => {
     e.preventDefault();
-    dispatch({ type: "addNewItem", payload: formValues }); // not all values are necessary
+    dispatch({ type: "addNewItem", payload: formValues }); // TODO not all values are necessary
+  };
+
+  // TODO REMOVE ANY
+  const removeListItem = (e: React.MouseEvent, id: number) => {
+    console.log(id);
+    e.preventDefault();
+    dispatch({ type: "removeListItem", payload: id }); // TODO not all values are necessary
   };
 
   return (
@@ -67,7 +82,7 @@ function App() {
         </div>
       </Container>
       <Container className="mt-5">
-        <List data={state.listData} />
+        <List data={state.listData} removeListItem={removeListItem} />
       </Container>
     </>
   );

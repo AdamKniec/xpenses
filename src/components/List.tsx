@@ -12,7 +12,12 @@ const List = (props: ListProps) => {
               key={item.id}
             >
               {item.productOrService}
-              <Button variant="danger" className="pull-right" size="sm">
+              <Button
+                variant="danger"
+                className="pull-right"
+                size="sm"
+                onClick={(e) => props.removeListItem(e, item.id)}
+              >
                 Delete
               </Button>{" "}
             </ListGroup.Item>
