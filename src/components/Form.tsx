@@ -2,6 +2,7 @@ import { Button, Form } from "react-bootstrap";
 
 // TODO -> Get Rid of any
 const ExpensesForm = (props: any) => {
+  console.log(props);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setFormValues((prevState: {}) => {
       if (e.target.id === "formBasicCheckbox") {
@@ -62,7 +63,11 @@ const ExpensesForm = (props: any) => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={(e) => props.addNewListItem(e)}
+        >
           Submit
         </Button>
       </Form>
