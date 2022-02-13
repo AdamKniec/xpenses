@@ -2,13 +2,18 @@ import { Button, Form } from "react-bootstrap";
 
 // TODO -> Get Rid of any
 const ExpensesForm = (props: any) => {
-  console.log(props);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     props.setFormValues((prevState: {}) => {
       if (e.target.id === "formBasicCheckbox") {
         return {
           ...prevState,
           formBasicCheckbox: e.target.checked,
+        };
+      }
+      if (e.target.type === "radio") {
+        return {
+          ...prevState,
+          whoPaid: e.target.id,
         };
       }
       return { ...prevState, [e.target.id]: e.target.value };
@@ -26,6 +31,25 @@ const ExpensesForm = (props: any) => {
             onChange={handleChange}
           />
         </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Kto płacił</Form.Label>
+          <Form.Check
+            inline
+            label="A"
+            name="group1"
+            type="radio"
+            id="Adam"
+            onChange={handleChange}
+          />
+          <Form.Check
+            inline
+            label="K"
+            name="group1"
+            type="radio"
+            id="Klaudia"
+            onChange={handleChange}
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check
             type="checkbox"
@@ -34,6 +58,7 @@ const ExpensesForm = (props: any) => {
             checked={props.allowSplit}
           />
         </Form.Group>
+
         {!props.allowSplit && (
           <>
             <Form.Group className="mb-3" controlId="herShare">

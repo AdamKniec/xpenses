@@ -5,46 +5,16 @@ import ExpensesForm from "./Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import List from "./List";
 import React, { useReducer, useState } from "react";
+import { reducer } from "../AppReducer";
 
 const initialState = {
   listData:
     [
-      { productOrService: "Czynsz", price: 1000, id: 1 },
-      { productOrService: "Zakupy", price: 23, id: 2 },
-      { productOrService: "Prezent", price: 44, id: 3 },
-      { productOrService: "Restauracja", price: 53, id: 4 },
+      { productOrService: "Czynsz", price: 1000, id: 1, whoPaid: "Adam" },
+      { productOrService: "Zakupy", price: 23, id: 2, whoPaid: "Adam" },
+      { productOrService: "Prezent", price: 44, id: 3, whoPaid: "Adam" },
+      { productOrService: "Restauracja", price: 53, id: 4, whoPaid: "Adam" },
     ] || [],
-};
-const reducer = (
-  state: {
-    listData: { productOrService: string; price: number; id: number }[];
-  },
-  action: { type: string; payload: any }
-) => {
-  switch (action.type) {
-    case "addNewItem": // small refactor below would be nice
-      return {
-        ...state,
-        listData: [
-          ...state.listData,
-          {
-            productOrService: action.payload.product,
-            price: action.payload.price,
-            id: Math.random(),
-          },
-        ],
-      };
-
-    case "removeListItem":
-      return {
-        ...state,
-        listData: state.listData.filter((listItem) => {
-          return listItem.id !== action.payload;
-        }),
-      };
-    default:
-      return state;
-  }
 };
 
 function App() {
@@ -52,8 +22,8 @@ function App() {
     price: 0,
     formBasicCheckbox: true,
   });
+
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
 
   const addNewListItem = (e: any) => {
     e.preventDefault();

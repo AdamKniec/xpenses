@@ -12,6 +12,7 @@ const List = (props: ListProps) => {
               key={item.id}
             >
               {item.productOrService}
+              {item.whoPaid}
               <Button
                 variant="danger"
                 className="pull-right"
