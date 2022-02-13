@@ -2,6 +2,10 @@ import { Alert, Button, ListGroup } from "react-bootstrap";
 import { ListProps } from "./List.types";
 
 const List = (props: ListProps) => {
+  const handleDeleteClick = (id: number) => {
+    props.setModalVisible(true);
+    props.setIdToBeRemoved(id);
+  };
   return (
     <ListGroup>
       {props.data.length ? (
@@ -17,7 +21,7 @@ const List = (props: ListProps) => {
                 variant="danger"
                 className="pull-right"
                 size="sm"
-                onClick={(e) => props.removeListItem(e, item.id)}
+                onClick={() => handleDeleteClick(item.id)}
               >
                 Delete
               </Button>{" "}
