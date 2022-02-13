@@ -1,10 +1,11 @@
 import { Container } from "react-bootstrap";
 
 import ExpensesForm from "./Form";
+import { ModalWrapper as Modal } from "./Modal";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import List from "./List";
-import React, { useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 import { reducer } from "../AppReducer";
 
 const initialState = {
@@ -22,19 +23,22 @@ function App() {
     price: 0,
     formBasicCheckbox: true,
   });
-
+  const [modalVisible, setModalVisible] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [idToBeRemoved, setIdToBeRemoved] = useState<number>();
 
   const addNewListItem = (e: any) => {
     e.preventDefault();
     dispatch({ type: "addNewItem", payload: formValues }); // TODO not all values are necessary
   };
 
-  // TODO REMOVE ANY
-  const removeListItem = (e: React.MouseEvent, id: number) => {
-    console.log(id);
-    e.preventDefault();
-    dispatch({ type: "removeListItem", payload: id }); // TODO not all values are necessary
+  const handleModalHide = () => {
+    setModalVisible(false);
+  };
+
+  const handleDeleteModalConfirm = () => {
+    dispatch({ type: "removeListItem", payload: idToBeRemoved });
+    setModalVisible(false);
   };
 
   return (
@@ -52,7 +56,16 @@ function App() {
         </div>
       </Container>
       <Container className="mt-5">
-        <List data={state.listData} removeListItem={removeListItem} />
+        <Modal
+          show={modalVisible}
+          onHide={handleModalHide}
+          handleDeleteModalConfirm={handleDeleteModalConfirm}
+        />
+        <List
+          data={state.listData}
+          setModalVisible={setModalVisible}
+          setIdToBeRemoved={setIdToBeRemoved}
+        />
       </Container>
     </>
   );

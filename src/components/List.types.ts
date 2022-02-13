@@ -1,5 +1,3 @@
-import React from "react";
-
 export interface ListProps {
   data: {
     productOrService: string;
@@ -7,5 +5,6 @@ export interface ListProps {
     id: number;
     whoPaid: string;
   }[];
-  removeListItem: (e: React.MouseEvent, id: number) => void; // TODO REMOVE ANY
+  setIdToBeRemoved: (value: number) => void;
+  setModalVisible: (modalVisible: boolean) => void;
 }
