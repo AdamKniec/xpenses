@@ -2,6 +2,7 @@ import { Alert, Button, ListGroup } from "react-bootstrap";
 import { ListProps } from "./List.types";
 
 const List = (props: ListProps) => {
+  console.log(props);
   const handleDeleteClick = (id: number) => {
     props.setModalVisible(true);
     props.setIdToBeRemoved(id);
@@ -10,13 +11,23 @@ const List = (props: ListProps) => {
     <ListGroup>
       {props.data.length ? (
         props.data.map((item) => {
+          console.log(item);
           return (
             <ListGroup.Item
               className="d-flex justify-content-between mb-4"
               key={item.id}
             >
-              {item.productOrService}
-              {item.whoPaid}
+              <span>Za co: {item.productOrService}</span>
+              <span>Kto płacił: {item.whoPaid}</span>
+              <span>Cena: {item.price}</span>
+              <span className={`${item.whoPaid === "Adam" && "text-warning"}`}>
+                Dług K: {item.hisShare}
+              </span>
+              <span
+                className={`${item.whoPaid === "Klaudia" && "text-warning"}`}
+              >
+                Dług A: {item.herShare}
+              </span>
               <Button
                 variant="danger"
                 className="pull-right"

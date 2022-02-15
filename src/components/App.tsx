@@ -11,10 +11,24 @@ import { reducer } from "../AppReducer";
 const initialState = {
   listData:
     [
-      { productOrService: "Czynsz", price: 1000, id: 1, whoPaid: "Adam" },
-      { productOrService: "Zakupy", price: 23, id: 2, whoPaid: "Adam" },
-      { productOrService: "Prezent", price: 44, id: 3, whoPaid: "Adam" },
-      { productOrService: "Restauracja", price: 53, id: 4, whoPaid: "Adam" },
+      {
+        productOrService: "Czynsz",
+        price: 1000,
+        id: 1,
+        whoPaid: "Adam",
+        hisShare: 0,
+        herShare: 0,
+        formBasicCheckbox: true,
+      },
+      {
+        productOrService: "Zakupy",
+        price: 23,
+        id: 2,
+        whoPaid: "Adam",
+        hisShare: 0,
+        herShare: 0,
+        formBasicCheckbox: true,
+      },
     ] || [],
 };
 
@@ -23,6 +37,7 @@ function App() {
     price: 0,
     formBasicCheckbox: true,
   });
+  console.log(formValues);
   const [modalVisible, setModalVisible] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [idToBeRemoved, setIdToBeRemoved] = useState<number>();

@@ -5,10 +5,14 @@ export const reducer = (
       price: number;
       id: number;
       whoPaid: "Adam";
+      hisShare: number;
+      herShare: number;
+      formBasicCheckbox: boolean;
     }[];
   },
   action: { type: string; payload: any }
 ) => {
+  console.log(action.payload);
   switch (action.type) {
     case "addNewItem": // small refactor below would be nice
       return {
@@ -20,6 +24,9 @@ export const reducer = (
             price: action.payload.price,
             id: Math.random(),
             whoPaid: action.payload.whoPaid,
+            hisShare: action.payload.hisShare,
+            herShare: action.payload.herShare,
+            formBasicCheckbox: action.payload.formBasicCheckbox, // Czy to bedzie potrzebne tutaj?
           },
         ],
       };
