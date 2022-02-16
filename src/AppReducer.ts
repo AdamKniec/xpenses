@@ -17,18 +17,7 @@ export const reducer = (
     case "addNewItem": // small refactor below would be nice
       return {
         ...state,
-        listData: [
-          ...state.listData,
-          {
-            productOrService: action.payload.product,
-            price: action.payload.price,
-            id: Math.random(),
-            whoPaid: action.payload.whoPaid,
-            hisShare: action.payload.hisShare,
-            herShare: action.payload.herShare,
-            formBasicCheckbox: action.payload.formBasicCheckbox, // Czy to bedzie potrzebne tutaj?
-          },
-        ],
+        listData: [...state.listData, action.payload],
       };
 
     case "removeListItem":

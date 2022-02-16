@@ -21,12 +21,12 @@ const List = (props: ListProps) => {
               <span>Kto płacił: {item.whoPaid}</span>
               <span>Cena: {item.price}</span>
               <span className={`${item.whoPaid === "Adam" && "text-warning"}`}>
-                Dług K: {item.hisShare}
+                Dług K: {item.herShare}
               </span>
               <span
                 className={`${item.whoPaid === "Klaudia" && "text-warning"}`}
               >
-                Dług A: {item.herShare}
+                Dług A: {item.hisShare}
               </span>
               <Button
                 variant="danger"

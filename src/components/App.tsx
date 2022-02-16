@@ -20,15 +20,6 @@ const initialState = {
         herShare: 0,
         formBasicCheckbox: true,
       },
-      {
-        productOrService: "Zakupy",
-        price: 23,
-        id: 2,
-        whoPaid: "Adam",
-        hisShare: 0,
-        herShare: 0,
-        formBasicCheckbox: true,
-      },
     ] || [],
 };
 
@@ -36,15 +27,70 @@ function App() {
   const [formValues, setFormValues] = useState({
     price: 0,
     formBasicCheckbox: true,
+    productOrService: "",
+    hisShare: 0,
+    herShare: 0,
+    whoPaid: "",
   });
   console.log(formValues);
   const [modalVisible, setModalVisible] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [idToBeRemoved, setIdToBeRemoved] = useState<number>();
 
+  const calculateShare = (
+    whoPaid: string,
+    price: number,
+    halfSplit: boolean,
+    hisShare: number,
+    herShare: number
+  ) => {
+    if (halfSplit) {
+      return price / 2;
+    }
+    if (!halfSplit) {
+      if (whoPaid === "Adam") {
+        return herShare;
+      }
+      return hisShare;
+    }
+  };
   const addNewListItem = (e: any) => {
     e.preventDefault();
-    dispatch({ type: "addNewItem", payload: formValues }); // TODO not all values are necessary
+    const prepareData = (formValues: any) => {
+      const { product, price, formBasicCheckbox, hisShare, herShare, whoPaid } =
+        formValues;
+
+      return {
+        productOrService: product,
+        price,
+        formBasicCheckbox,
+        id: Math.random(),
+        hisShare:
+          (whoPaid === "Klaudia" &&
+            calculateShare(
+              whoPaid,
+              price,
+              formBasicCheckbox,
+              hisShare,
+              herShare
+            )) ||
+          0,
+        herShare:
+          (whoPaid === "Adam" &&
+            calculateShare(
+              whoPaid,
+              price,
+              formBasicCheckbox,
+              hisShare,
+              herShare
+            )) ||
+          0,
+
+        whoPaid,
+      };
+    };
+    console.log(prepareData(formValues));
+    dispatch({ type: "addNewItem", payload: prepareData(formValues) }); // TODO not all values are necessary
   };
 
   const handleModalHide = () => {
