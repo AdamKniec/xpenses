@@ -7,18 +7,19 @@ interface ModalProps {
 }
 
 export const ModalWrapper = (props: ModalProps) => {
+  const { onHide, show, handleDeleteModalConfirm } = props;
   return (
-    <Modal show={props.show} onHide={props.onHide}>
+    <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>Usuwanie</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+      <Modal.Body>Czy na pewno chcesz usunąć ten element?</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={props.onHide}>
-          Close
+        <Button variant="secondary" onClick={onHide}>
+          Nie
         </Button>
-        <Button variant="primary" onClick={props.handleDeleteModalConfirm}>
-          Confirm
+        <Button variant="primary" onClick={handleDeleteModalConfirm}>
+          Tak
         </Button>
       </Modal.Footer>
     </Modal>

@@ -47,6 +47,7 @@ const ExpensesForm = (props: any) => {
             name="group1"
             type="radio"
             id="Klaudia"
+            checked={true}
             onChange={handleChange}
           />
         </Form.Group>

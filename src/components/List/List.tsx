@@ -2,37 +2,36 @@ import { Alert, Button, ListGroup } from "react-bootstrap";
 import { ListProps } from "./List.types";
 
 const List = (props: ListProps) => {
-  console.log(props);
+  const { setModalVisible, setIdToBeRemoved, data } = props;
   const handleDeleteClick = (id: number) => {
-    props.setModalVisible(true);
-    props.setIdToBeRemoved(id);
+    setModalVisible(true);
+    setIdToBeRemoved(id);
   };
   return (
     <ListGroup>
-      {props.data.length ? (
-        props.data.map((item) => {
-          console.log(item);
+      {data.length ? (
+        data.map((item) => {
+          const { productOrService, whoPaid, price, herShare, hisShare, id } =
+            item;
           return (
             <ListGroup.Item
               className="d-flex justify-content-between mb-4"
-              key={item.id}
+              key={id}
             >
-              <span>Za co: {item.productOrService}</span>
-              <span>Kto płacił: {item.whoPaid}</span>
-              <span>Cena: {item.price}</span>
-              <span className={`${item.whoPaid === "Adam" && "text-warning"}`}>
-                Dług K: {item.herShare}
+              <span>Za co: {productOrService}</span>
+              <span>Kto płacił: {whoPaid}</span>
+              <span>Cena: {price}</span>
+              <span className={`${whoPaid === "Adam" && "text-warning"}`}>
+                Dług K: {herShare}
               </span>
-              <span
-                className={`${item.whoPaid === "Klaudia" && "text-warning"}`}
-              >
-                Dług A: {item.hisShare}
+              <span className={`${whoPaid === "Klaudia" && "text-warning"}`}>
+                Dług A: {hisShare}
               </span>
               <Button
                 variant="danger"
                 className="pull-right"
                 size="sm"
-                onClick={() => handleDeleteClick(item.id)}
+                onClick={() => handleDeleteClick(id)}
               >
                 Delete
               </Button>{" "}

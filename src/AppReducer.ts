@@ -12,7 +12,6 @@ export const reducer = (
   },
   action: { type: string; payload: any }
 ) => {
-  console.log(action.payload);
   switch (action.type) {
     case "addNewItem": // small refactor below would be nice
       return {

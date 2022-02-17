@@ -1,10 +1,10 @@
 import { Container } from "react-bootstrap";
 
-import ExpensesForm from "./Form";
-import { ModalWrapper as Modal } from "./Modal";
+import ExpensesForm from "./Form/Form";
+import { ModalWrapper as Modal } from "./Modal/Modal";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import List from "./List";
+import List from "./List/List";
 import { useReducer, useState } from "react";
 import { reducer } from "../AppReducer";
 
@@ -15,7 +15,7 @@ const initialState = {
         productOrService: "Czynsz",
         price: 1000,
         id: 1,
-        whoPaid: "Adam",
+        whoPaid: "Klaudia",
         hisShare: 0,
         herShare: 0,
         formBasicCheckbox: true,
@@ -30,9 +30,9 @@ function App() {
     productOrService: "",
     hisShare: 0,
     herShare: 0,
-    whoPaid: "",
+    whoPaid: "Klaudia",
   });
-  console.log(formValues);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [idToBeRemoved, setIdToBeRemoved] = useState<number>();
@@ -89,7 +89,7 @@ function App() {
         whoPaid,
       };
     };
-    console.log(prepareData(formValues));
+
     dispatch({ type: "addNewItem", payload: prepareData(formValues) }); // TODO not all values are necessary
   };
 
