@@ -4,6 +4,8 @@ export interface ListProps {
     price: number;
     id: number;
     whoPaid: string;
+    hisShare: number;
+    herShare: number;
   }[];
   setIdToBeRemoved: (value: number) => void;
   setModalVisible: (modalVisible: boolean) => void;

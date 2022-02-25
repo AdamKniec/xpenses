@@ -5,6 +5,9 @@ export const reducer = (
       price: number;
       id: number;
       whoPaid: "Adam";
+      hisShare: number;
+      herShare: number;
+      formBasicCheckbox: boolean;
     }[];
   },
   action: { type: string; payload: any }
@@ -13,15 +16,7 @@ export const reducer = (
     case "addNewItem": // small refactor below would be nice
       return {
         ...state,
-        listData: [
-          ...state.listData,
-          {
-            productOrService: action.payload.product,
-            price: action.payload.price,
-            id: Math.random(),
-            whoPaid: action.payload.whoPaid,
-          },
-        ],
+        listData: [...state.listData, action.payload],
       };
 
     case "removeListItem":
