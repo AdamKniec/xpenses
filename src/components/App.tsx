@@ -15,7 +15,7 @@ const initialState = {
         productOrService: "Czynsz",
         price: 1000,
         id: 1,
-        whoPaid: "Klaudia",
+        whoPaid: "",
         hisShare: 0,
         herShare: 0,
         formBasicCheckbox: true,
@@ -30,7 +30,7 @@ function App() {
     productOrService: "",
     hisShare: 0,
     herShare: 0,
-    whoPaid: "Klaudia",
+    whoPaid: "",
   });
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -54,42 +54,42 @@ function App() {
       return hisShare;
     }
   };
+  const prepareData = (formValues: any) => {
+    const { product, price, formBasicCheckbox, hisShare, herShare, whoPaid } =
+      formValues;
+
+    return {
+      productOrService: product,
+      price,
+      formBasicCheckbox,
+      id: Math.random(),
+      hisShare:
+        (whoPaid === "Klaudia" &&
+          calculateShare(
+            whoPaid,
+            price,
+            formBasicCheckbox,
+            hisShare,
+            herShare
+          )) ||
+        0,
+      herShare:
+        (whoPaid === "Adam" &&
+          calculateShare(
+            whoPaid,
+            price,
+            formBasicCheckbox,
+            hisShare,
+            herShare
+          )) ||
+        0,
+
+      whoPaid,
+    };
+  };
+
   const addNewListItem = (e: any) => {
     e.preventDefault();
-    const prepareData = (formValues: any) => {
-      const { product, price, formBasicCheckbox, hisShare, herShare, whoPaid } =
-        formValues;
-
-      return {
-        productOrService: product,
-        price,
-        formBasicCheckbox,
-        id: Math.random(),
-        hisShare:
-          (whoPaid === "Klaudia" &&
-            calculateShare(
-              whoPaid,
-              price,
-              formBasicCheckbox,
-              hisShare,
-              herShare
-            )) ||
-          0,
-        herShare:
-          (whoPaid === "Adam" &&
-            calculateShare(
-              whoPaid,
-              price,
-              formBasicCheckbox,
-              hisShare,
-              herShare
-            )) ||
-          0,
-
-        whoPaid,
-      };
-    };
-
     dispatch({ type: "addNewItem", payload: prepareData(formValues) }); // TODO not all values are necessary
   };
 
@@ -113,6 +113,7 @@ function App() {
             setFormValues={setFormValues}
             allowSplit={formValues.formBasicCheckbox}
             addNewListItem={addNewListItem}
+            formData={prepareData(formValues)}
           />
         </div>
       </Container>

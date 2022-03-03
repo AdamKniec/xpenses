@@ -20,6 +20,18 @@ const ExpensesForm = (props: any) => {
     });
   };
 
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+    props.addNewListItem(e);
+    fetch("http://localhost:5001", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(props.formData),
+    });
+  };
+
   return (
     <div>
       <Form>
@@ -47,7 +59,6 @@ const ExpensesForm = (props: any) => {
             name="group1"
             type="radio"
             id="Klaudia"
-            checked={true}
             onChange={handleChange}
           />
         </Form.Group>
@@ -89,11 +100,7 @@ const ExpensesForm = (props: any) => {
             onChange={handleChange}
           />
         </Form.Group>
-        <Button
-          variant="primary"
-          type="submit"
-          onClick={(e) => props.addNewListItem(e)}
-        >
+        <Button variant="primary" type="submit" onClick={handleFormSubmit}>
           Submit
         </Button>
       </Form>
