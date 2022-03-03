@@ -1,15 +1,5 @@
 export const reducer = (
-  state: {
-    listData: {
-      productOrService: string;
-      price: number;
-      id: number;
-      whoPaid: "Adam";
-      hisShare: number;
-      herShare: number;
-      formBasicCheckbox: boolean;
-    }[];
-  },
+  state: initialStateModel,
   action: { type: string; payload: any }
 ) => {
   switch (action.type) {
@@ -30,3 +20,15 @@ export const reducer = (
       return state;
   }
 };
+
+interface initialStateModel {
+  listData: {
+    productOrService: string;
+    price: number;
+    id: number;
+    whoPaid: string;
+    hisShare: number;
+    herShare: number;
+    formBasicCheckbox: boolean;
+  }[];
+}
